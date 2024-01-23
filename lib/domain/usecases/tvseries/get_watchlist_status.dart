@@ -1,9 +1,9 @@
 import 'package:ditonton/domain/repositories/tvseries_repository.dart';
 
-class GetWatchListStatus {
+class GetWatchListStatusTvSeries {
   final TvSeriesRespositories repository;
 
-  GetWatchListStatus(this.repository);
+  GetWatchListStatusTvSeries(this.repository);
 
   Future<bool> execute(int id) async {
     return repository.isAddedToWatchlist(id);
