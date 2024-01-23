@@ -27,8 +27,8 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
     required this.removeWatchlist,
   });
 
-  late TvSeriresDetail _tvSeries;
-  TvSeriresDetail get tvSerires => _tvSeries;
+  late TvSeriesDetail _tvSeries;
+  TvSeriesDetail get tvSeries => _tvSeries;
 
   RequestState _tvSeriesState = RequestState.Empty;
   RequestState get tvSeriesState => _tvSeriesState;
@@ -79,7 +79,7 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
   String _watchlistMessage = '';
   String get watchlistMessage => _watchlistMessage;
 
-  Future<void> addWatchlist(TvSeriresDetail tvSeries) async {
+  Future<void> addWatchlist(TvSeriesDetail tvSeries) async {
     final result = await saveWatchlist.execute(tvSeries);
 
     await result.fold(
@@ -94,7 +94,7 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
     await loadWatchlistStatus(tvSeries.id);
   }
 
-  Future<void> removeFromWatchlist(TvSeriresDetail tvSeries) async {
+  Future<void> removeFromWatchlist(TvSeriesDetail tvSeries) async {
     final result = await removeWatchlist.execute(tvSeries);
 
     await result.fold(

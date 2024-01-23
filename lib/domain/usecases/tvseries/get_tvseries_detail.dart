@@ -8,7 +8,7 @@ class GetTvSeriesDetail {
 
   GetTvSeriesDetail(this.repository);
 
-  Future<Either<Failure, TvSeriresDetail>> execute(int id) {
+  Future<Either<Failure, TvSeriesDetail>> execute(int id) {
     return repository.getTvSeriesDetail(id);
   }
 }

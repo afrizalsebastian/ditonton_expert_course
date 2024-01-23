@@ -106,7 +106,7 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => PopularTvSeriessNotifier(
+    () => PopularTvSeriesNotifier(
       locator(),
     ),
   );

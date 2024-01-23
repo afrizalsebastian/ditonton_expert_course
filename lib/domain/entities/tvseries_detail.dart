@@ -1,8 +1,8 @@
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:equatable/equatable.dart';
 
-class TvSeriresDetail extends Equatable {
-  TvSeriresDetail({
+class TvSeriesDetail extends Equatable {
+  TvSeriesDetail({
     required this.adult,
     required this.backdropPath,
     required this.episodeRunTime,

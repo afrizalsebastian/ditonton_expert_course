@@ -16,7 +16,7 @@ class TvSeriesTable extends Equatable {
     required this.overview,
   });
 
-  factory TvSeriesTable.fromEntity(TvSeriresDetail movie) => TvSeriesTable(
+  factory TvSeriesTable.fromEntity(TvSeriesDetail movie) => TvSeriesTable(
         id: movie.id,
         name: movie.name,
         posterPath: movie.posterPath,
