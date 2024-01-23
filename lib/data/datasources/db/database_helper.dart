@@ -39,14 +39,17 @@ class DatabaseHelper {
         title TEXT,
         overview TEXT,
         posterPath TEXT,
-        type TEXT,
+        type TEXT
       );
+    ''');
+
+    await db.execute('''
       CREATE TABLE  $_tblTvSeriesWatchlist (
         id INTEGER PRIMARY KEY,
-        title TEXT,
+        name TEXT,
         overview TEXT,
         posterPath TEXT,
-        type TEXT,
+        type TEXT
       );
     ''');
   }
