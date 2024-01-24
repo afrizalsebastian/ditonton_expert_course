@@ -15,7 +15,7 @@ import 'package:mockito/annotations.dart';
   TvSeriesRespositories,
   TvSeriesRemoteDataSource,
   TvSeriesLocalDataSource,
-  DatabaseHelper,
+  DatabaseHelper
 ], customMocks: [
   MockSpec<http.Client>(as: #MockHttpClient)
 ])
