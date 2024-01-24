@@ -12,7 +12,6 @@ void main() {
   testWidgets('Tapping back button should pop screen', (tester) async {
     await tester.pumpWidget(_makeTestableWidget(AboutPage()));
 
-    // tap back button
     await tester.tap(find.byType(IconButton));
     await tester.pumpAndSettle();
 

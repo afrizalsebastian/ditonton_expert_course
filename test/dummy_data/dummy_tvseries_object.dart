@@ -55,7 +55,7 @@ final testWatchlistTvSeries = TvSeries.watchlist(
 
 final testTvSeriesTable = TvSeriesTable(
   id: 1396,
-  name: 'Breaking Band',
+  name: 'Breaking Bad',
   posterPath: '/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg',
   overview:
       "When Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime.",
@@ -66,5 +66,5 @@ final testTvSeriesMap = {
   'overview':
       "When Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime.",
   'posterPath': '/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg',
-  'name': 'Breaking Band',
+  'name': 'Breaking Bad',
 };
