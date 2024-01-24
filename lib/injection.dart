@@ -27,6 +27,7 @@ import 'package:ditonton/domain/usecases/tvseries/get_watchlist_tvseries.dart';
 import 'package:ditonton/domain/usecases/tvseries/remove_watchlist.dart';
 import 'package:ditonton/domain/usecases/tvseries/save_watchlist.dart';
 import 'package:ditonton/domain/usecases/tvseries/search_tvseries.dart';
+import 'package:ditonton/presentation/provider/airing_today_tvseries_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
@@ -118,6 +119,11 @@ void init() {
   locator.registerFactory(
     () => WatchlistTvSeriesNotifier(
       getWatchlistTvSeries: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => AiringTodayTvSeriesNotifier(
+      locator(),
     ),
   );
 
