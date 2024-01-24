@@ -45,7 +45,7 @@ final testTvSeriesDetail = TvSeriesDetail(
   voteCount: 12978,
 );
 
-final testTvSerieslist = TvSeries.watchlist(
+final testWatchlistTvSeries = TvSeries.watchlist(
   id: 1396,
   name: 'Breaking Bad',
   posterPath: '/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg',
