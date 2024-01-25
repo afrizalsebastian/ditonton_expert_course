@@ -1,26 +1,26 @@
-import 'package:ditonton/common/state_enum.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:ditonton/domain/entities/tvseries.dart';
+import 'package:ditonton/presentation/bloc/tvseries_watchlist/tvseries_watchlist_bloc.dart';
 import 'package:ditonton/presentation/pages/watchlist_tvseries_page.dart';
-import 'package:ditonton/presentation/provider/watchlist_tvseries_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
+import 'package:mocktail/mocktail.dart';
 
-import 'watchlist_tvseries_page_test.mocks.dart';
+class MockTvSeriesWatchlistBloc
+    extends MockBloc<TvSeriesWatchlistEvent, TvSeriesWatchlistState>
+    implements TvSeriesWatchlistBloc {}
 
-@GenerateMocks([WatchlistTvSeriesNotifier])
 void main() {
-  late MockWatchlistTvSeriesNotifier mockNotifier;
+  late MockTvSeriesWatchlistBloc mockBloc;
 
   setUp(() {
-    mockNotifier = MockWatchlistTvSeriesNotifier();
+    mockBloc = MockTvSeriesWatchlistBloc();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<WatchlistTvSeriesNotifier>.value(
-      value: mockNotifier,
+    return BlocProvider<TvSeriesWatchlistBloc>.value(
+      value: mockBloc,
       child: MaterialApp(
         home: body,
       ),
@@ -29,7 +29,7 @@ void main() {
 
   testWidgets('Page should display center progress',
       (WidgetTester tester) async {
-    when(mockNotifier.watchlistState).thenReturn(RequestState.Loading);
+    when(() => mockBloc.state).thenReturn(TvSeriesWatchlistLoading());
 
     await tester.pumpWidget(_makeTestableWidget(WatchlistTvSeriesPage()));
 
@@ -37,9 +37,8 @@ void main() {
   });
 
   testWidgets('Page should display text error', (WidgetTester tester) async {
-    when(mockNotifier.watchlistState).thenReturn(RequestState.Error);
-    when(mockNotifier.message).thenReturn('Error message');
-
+    when(() => mockBloc.state)
+        .thenReturn(TvSeriesWatchlistError('Error message'));
     await tester.pumpWidget(_makeTestableWidget(WatchlistTvSeriesPage()));
 
     expect(find.byKey(Key('error_message')), findsOneWidget);
@@ -47,8 +46,8 @@ void main() {
 
   testWidgets('Page should display list view when data loaded',
       (WidgetTester tester) async {
-    when(mockNotifier.watchlistState).thenReturn(RequestState.Loaded);
-    when(mockNotifier.watchlistTvSeries).thenReturn(<TvSeries>[]);
+    when(() => mockBloc.state)
+        .thenReturn(TvSeriesWatchlistHasData(<TvSeries>[]));
 
     await tester.pumpWidget(_makeTestableWidget(WatchlistTvSeriesPage()));
 

@@ -1,26 +1,25 @@
-import 'package:ditonton/common/state_enum.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/presentation/bloc/movies_search/search_bloc.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
+import 'package:mocktail/mocktail.dart';
 
-import 'search_page_test.mocks.dart';
+class MockSearchBloc extends MockBloc<SearchEvent, SearchState>
+    implements SearchBloc {}
 
-@GenerateMocks([MovieSearchNotifier])
 void main() {
-  late MockMovieSearchNotifier mockNotifier;
+  late MockSearchBloc mockBloc;
 
   setUp(() {
-    mockNotifier = MockMovieSearchNotifier();
+    mockBloc = MockSearchBloc();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<MovieSearchNotifier>.value(
-      value: mockNotifier,
+    return BlocProvider<SearchBloc>.value(
+      value: mockBloc,
       child: MaterialApp(
         home: body,
       ),
@@ -29,8 +28,7 @@ void main() {
 
   testWidgets('should display movies when data is loaded',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Loaded);
-    when(mockNotifier.searchResult).thenReturn(<Movie>[]);
+    when(() => mockBloc.state).thenReturn(SearchHasData(<Movie>[]));
 
     final listViewFinder = find.byType(ListView);
 
@@ -41,8 +39,7 @@ void main() {
 
   testWidgets('should display text with search result when data is loaded',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Loaded);
-    when(mockNotifier.searchResult).thenReturn(<Movie>[]);
+    when(() => mockBloc.state).thenReturn(SearchHasData(<Movie>[]));
 
     final textFinder = find.text('Search Result');
 
@@ -53,7 +50,7 @@ void main() {
 
   testWidgets('should display empty container when no data is loaded',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Empty);
+    when(() => mockBloc.state).thenReturn(SearchEmpty());
 
     final containerFinder = find.byType(Container);
 
@@ -64,11 +61,11 @@ void main() {
 
   testWidgets('should display text with message when error',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Error);
-    final containerFinder = find.byType(Container);
+    when(() => mockBloc.state).thenReturn(SearchError('Error Message'));
+    final textFinder = find.byKey(Key('error_message'));
 
     await tester.pumpWidget(_makeTestableWidget(SearchPage()));
 
-    expect(containerFinder, findsOneWidget);
+    expect(textFinder, findsOneWidget);
   });
 }

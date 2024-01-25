@@ -42,7 +42,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
                 itemCount: data.length,
               );
             } else if (state is TopRatedMoviesError) {
-              return Text(state.message);
+              return Text(key: Key('error_message'), state.message);
             } else {
               return Text('Failed');
             }

@@ -54,7 +54,7 @@ class SearchPage extends StatelessWidget {
               } else if (state is SearchError) {
                 return Expanded(
                   child: Center(
-                    child: Text(state.message),
+                    child: Text(key: Key('error_message'), state.message),
                   ),
                 );
               } else {

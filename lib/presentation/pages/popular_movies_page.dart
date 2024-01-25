@@ -42,7 +42,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
                 itemCount: data.length,
               );
             } else if (state is PopularMoviesError) {
-              return Text(state.message);
+              return Text(key: Key('error_message'), state.message);
             } else {
               return Text('Failed');
             }

@@ -42,7 +42,7 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
                 itemCount: data.length,
               );
             } else if (state is TopRatedTvSeriesError) {
-              return Text(state.message);
+              return Text(key: Key('error_message'), state.message);
             } else {
               return Text('Failed');
             }

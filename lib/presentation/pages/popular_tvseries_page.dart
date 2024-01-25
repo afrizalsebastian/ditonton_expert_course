@@ -42,7 +42,7 @@ class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
                 itemCount: data.length,
               );
             } else if (state is PopularTvSeriesError) {
-              return Text(state.message);
+              return Text(key: Key('error_message'), state.message);
             } else {
               return Text('Failed');
             }

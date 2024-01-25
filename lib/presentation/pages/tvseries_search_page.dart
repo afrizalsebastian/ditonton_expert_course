@@ -55,7 +55,7 @@ class SearchPageTvSeries extends StatelessWidget {
               } else if (state is SearchTvSeriesError) {
                 return Expanded(
                   child: Center(
-                    child: Text(state.message),
+                    child: Text(key: Key('error_message'), state.message),
                   ),
                 );
               } else {
