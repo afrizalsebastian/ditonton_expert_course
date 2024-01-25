@@ -245,7 +245,7 @@ class DetailContent extends StatelessWidget {
                                   return Container();
                                 }
                               },
-                            )
+                            ),
                           ],
                         ),
                       ),
