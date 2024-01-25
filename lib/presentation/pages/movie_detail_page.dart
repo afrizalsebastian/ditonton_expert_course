@@ -103,53 +103,60 @@ class DetailContent extends StatelessWidget {
                               movie.title,
                               style: kHeading5,
                             ),
-                            // ElevatedButton(
-                            //   onPressed: () async {
-                            //     if (!isAddedWatchlist) {
-                            //       await Provider.of<MovieDetailNotifier>(
-                            //               context,
-                            //               listen: false)
-                            //           .addWatchlist(movie);
-                            //     } else {
-                            //       await Provider.of<MovieDetailNotifier>(
-                            //               context,
-                            //               listen: false)
-                            //           .removeFromWatchlist(movie);
-                            //     }
+                            BlocBuilder<MovieDetailWatchlistBloc,
+                                MovieDetailWatchlistState>(
+                              builder: (context, state) {
+                                return ElevatedButton(
+                                  onPressed: () async {
+                                    var message;
+                                    if (state is NotInWatchlist) {
+                                      context
+                                          .read<MovieDetailWatchlistBloc>()
+                                          .add(AddWatchlistDetail(movie));
+                                      message = 'Added to Watchlist';
+                                    } else if (state is InWatchlist) {
+                                      context
+                                          .read<MovieDetailWatchlistBloc>()
+                                          .add(RemoveWatchlistDetail(movie));
+                                      message = 'Removed from Watchlist';
+                                    } else {
+                                      context
+                                          .read<MovieDetailWatchlistBloc>()
+                                          .add(LoadWatchlistDetail(movie.id));
+                                      message = state.message;
+                                    }
 
-                            //     final message =
-                            //         Provider.of<MovieDetailNotifier>(context,
-                            //                 listen: false)
-                            //             .watchlistMessage;
-
-                            //     if (message ==
-                            //             MovieDetailNotifier
-                            //                 .watchlistAddSuccessMessage ||
-                            //         message ==
-                            //             MovieDetailNotifier
-                            //                 .watchlistRemoveSuccessMessage) {
-                            //       ScaffoldMessenger.of(context).showSnackBar(
-                            //           SnackBar(content: Text(message)));
-                            //     } else {
-                            //       showDialog(
-                            //           context: context,
-                            //           builder: (context) {
-                            //             return AlertDialog(
-                            //               content: Text(message),
-                            //             );
-                            //           });
-                            //     }
-                            //   },
-                            //   child: Row(
-                            //     mainAxisSize: MainAxisSize.min,
-                            //     children: [
-                            //       isAddedWatchlist
-                            //           ? Icon(Icons.check)
-                            //           : Icon(Icons.add),
-                            //       Text('Watchlist'),
-                            //     ],
-                            //   ),
-                            // ),
+                                    if (message ==
+                                            MovieDetailWatchlistBloc
+                                                .watchlistAddSuccessMessage ||
+                                        message ==
+                                            MovieDetailWatchlistBloc
+                                                .watchlistRemoveSuccessMessage) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                              SnackBar(content: Text(message)));
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              content: Text(message),
+                                            );
+                                          });
+                                    }
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      state is InWatchlist
+                                          ? Icon(Icons.check)
+                                          : Icon(Icons.add),
+                                      Text('Watchlist'),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
                             Text(
                               _showGenres(movie.genres),
                             ),

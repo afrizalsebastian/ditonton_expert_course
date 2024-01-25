@@ -38,11 +38,11 @@ class MovieDetailWatchlistBloc
 
       final result = await saveWatchlist.execute(movieDetail);
 
-      await result.fold(
-        (failure) async {
-          emit(NotInWatchlist(failure.message));
+      result.fold(
+        (failure) {
+          emit(FailureWatchlist(failure.message));
         },
-        (successMessage) async {
+        (successMessage) {
           emit(InWatchlist(successMessage));
         },
       );
@@ -53,11 +53,11 @@ class MovieDetailWatchlistBloc
 
       final result = await removeWatchlist.execute(movieDetail);
 
-      await result.fold(
-        (failure) async {
-          emit(InWatchlist(failure.message));
+      result.fold(
+        (failure) {
+          emit(FailureWatchlist(failure.message));
         },
-        (successMessage) async {
+        (successMessage) {
           emit(NotInWatchlist(successMessage));
         },
       );
