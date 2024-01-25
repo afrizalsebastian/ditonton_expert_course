@@ -3,6 +3,7 @@ import 'package:ditonton/data/datasources/movie_local_data_source.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton/data/datasources/tvseries_local_data_source.dart';
 import 'package:ditonton/data/datasources/tvseries_remote_data_source.dart';
+import 'package:ditonton/data/datasources/utils/ssl_pinning.dart';
 import 'package:ditonton/data/repositories/movie_repository_impl.dart';
 import 'package:ditonton/data/repositories/tvseries_respositoriy.impl.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
@@ -57,11 +58,13 @@ import 'package:ditonton/presentation/provider/tvseries_search_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_tvseries_notifier.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 
 final locator = GetIt.instance;
 
-void init() {
+Future<void> init() async {
+  IOClient ioClient = await SslPinning.ioClient;
+
   // provider movies
   locator.registerFactory(
     () => MovieListNotifier(
@@ -231,5 +234,5 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton<IOClient>(() => ioClient);
 }
