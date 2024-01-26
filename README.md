@@ -50,3 +50,4 @@ Jika kamu menerapkan modular pada project, Anda dapat memanfaatkan berkas `test.
     Proses ini akan men-*generate* berkas `lcov.info` dan folder `coverage` terkait dengan laporan coverage.
 4. Tunggu proses testing selesai hingga muncul web terkait laporan coverage.
 
+## Continous Integration Badges [![Codemagic build status](https://api.codemagic.io/apps/65b27bb29206ddde74eed080/65b27bb29206ddde74eed07f/status_badge.svg)](https://codemagic.io/apps/65b27bb29206ddde74eed080/65b27bb29206ddde74eed07f/latest_build)
