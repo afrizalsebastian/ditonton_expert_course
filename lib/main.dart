@@ -32,6 +32,7 @@ import 'package:ditonton/presentation/pages/tvseries_page.dart';
 import 'package:ditonton/presentation/pages/tvseries_search_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_tvseries_page.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,14 +41,23 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await di.init();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  try {
+    await di.init();
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
+
+    di.locator<FirebaseAnalytics>().setAnalyticsCollectionEnabled(true);
+  } catch (e) {
+    print("Failed to initialize Firebase: $e");
+  }
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    FirebaseAnalytics firebaseAnalytics = di.locator<FirebaseAnalytics>();
+
     return MultiProvider(
       providers: [
         BlocProvider(
@@ -108,7 +118,10 @@ class MyApp extends StatelessWidget {
           textTheme: kTextTheme,
         ),
         home: HomeMoviePage(),
-        navigatorObservers: [routeObserver],
+        navigatorObservers: [
+          routeObserver,
+          FirebaseAnalyticsObserver(analytics: firebaseAnalytics),
+        ],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case '/home':

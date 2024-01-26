@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/injection.dart' as di;
 import 'package:ditonton/presentation/bloc/now_playing_movies/now_playing_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/popular_movies/popular_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/tvseries_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_tvseries_page.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,7 +56,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             ListTile(
               leading: Icon(Icons.tv),
               title: Text('TV Series'),
-              onTap: () {
+              onTap: () async {
+                await di.locator<FirebaseAnalytics>().logEvent(
+                  name: 'page_tracked',
+                  parameters: {
+                    'page_name': TvSeriesPage.ROUTE_NAME,
+                  },
+                );
                 Navigator.pushNamed(context, TvSeriesPage.ROUTE_NAME);
               },
             ),

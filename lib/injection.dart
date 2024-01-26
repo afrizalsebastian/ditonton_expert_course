@@ -57,6 +57,7 @@ import 'package:ditonton/presentation/provider/tvseries_list_notifier.dart';
 import 'package:ditonton/presentation/provider/tvseries_search_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_tvseries_notifier.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/io_client.dart';
 
@@ -235,4 +236,7 @@ Future<void> init() async {
 
   // external
   locator.registerLazySingleton<IOClient>(() => ioClient);
+
+  locator.registerLazySingleton<FirebaseAnalytics>(
+      () => FirebaseAnalytics.instance);
 }
