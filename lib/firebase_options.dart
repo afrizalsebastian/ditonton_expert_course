@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -46,30 +49,20 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDOiQREjdOAw8CjR_ojkyOehoBuGGycGBw',
-    appId: '1:862742994362:web:464fe259aaa2b0bbd89183',
-    messagingSenderId: '862742994362',
-    projectId: 'dicoding-ditonton-a2992',
-    authDomain: 'dicoding-ditonton-a2992.firebaseapp.com',
-    storageBucket: 'dicoding-ditonton-a2992.appspot.com',
-    measurementId: 'G-X8VF245DRH',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCXqTR4KwPb8NrPjFcrPhXngFIFcPoKgUM',
-    appId: '1:862742994362:android:fc21be39cbcfa1d7d89183',
-    messagingSenderId: '862742994362',
-    projectId: 'dicoding-ditonton-a2992',
-    storageBucket: 'dicoding-ditonton-a2992.appspot.com',
+    apiKey: 'AIzaSyB1rKXHX5cALUF2tm42kkxwA5w_rgIeAzU',
+    appId: '1:115745450414:android:4d513afb0da000ecb4003f',
+    messagingSenderId: '115745450414',
+    projectId: 'ditonton-projects',
+    storageBucket: 'ditonton-projects.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBYXnfHEGXkpnaF02cDFu0wNpN6S-Zxqc8',
-    appId: '1:862742994362:ios:c4ec917c14fc1b1fd89183',
-    messagingSenderId: '862742994362',
-    projectId: 'dicoding-ditonton-a2992',
-    storageBucket: 'dicoding-ditonton-a2992.appspot.com',
+    apiKey: 'AIzaSyA2BKYC8mgLlbLCJkjHDMTOxLNb6q4V97U',
+    appId: '1:115745450414:ios:4093288a140cc62eb4003f',
+    messagingSenderId: '115745450414',
+    projectId: 'ditonton-projects',
+    storageBucket: 'ditonton-projects.appspot.com',
     iosBundleId: 'com.example.ditontonExpertCourse',
   );
 }
