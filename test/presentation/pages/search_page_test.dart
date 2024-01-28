@@ -17,7 +17,7 @@ void main() {
     mockBloc = MockSearchBloc();
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return BlocProvider<SearchBloc>.value(
       value: mockBloc,
       child: MaterialApp(
@@ -28,22 +28,22 @@ void main() {
 
   testWidgets('should display movies when data is loaded',
       (WidgetTester tester) async {
-    when(() => mockBloc.state).thenReturn(SearchHasData(<Movie>[]));
+    when(() => mockBloc.state).thenReturn(SearchHasData(const <Movie>[]));
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(_makeTestableWidget(SearchPage()));
+    await tester.pumpWidget(makeTestableWidget(const SearchPage()));
 
     expect(listViewFinder, findsOneWidget);
   });
 
   testWidgets('should display text with search result when data is loaded',
       (WidgetTester tester) async {
-    when(() => mockBloc.state).thenReturn(SearchHasData(<Movie>[]));
+    when(() => mockBloc.state).thenReturn(SearchHasData(const <Movie>[]));
 
     final textFinder = find.text('Search Result');
 
-    await tester.pumpWidget(_makeTestableWidget(SearchPage()));
+    await tester.pumpWidget(makeTestableWidget(const SearchPage()));
 
     expect(textFinder, findsOneWidget);
   });
@@ -54,7 +54,7 @@ void main() {
 
     final containerFinder = find.byType(Container);
 
-    await tester.pumpWidget(_makeTestableWidget(SearchPage()));
+    await tester.pumpWidget(makeTestableWidget(const SearchPage()));
 
     expect(containerFinder, findsOneWidget);
   });
@@ -62,9 +62,9 @@ void main() {
   testWidgets('should display text with message when error',
       (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(SearchError('Error Message'));
-    final textFinder = find.byKey(Key('error_message'));
+    final textFinder = find.byKey(const Key('error_message'));
 
-    await tester.pumpWidget(_makeTestableWidget(SearchPage()));
+    await tester.pumpWidget(makeTestableWidget(const SearchPage()));
 
     expect(textFinder, findsOneWidget);
   });

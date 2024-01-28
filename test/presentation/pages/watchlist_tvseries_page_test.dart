@@ -18,7 +18,7 @@ void main() {
     mockBloc = MockTvSeriesWatchlistBloc();
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return BlocProvider<TvSeriesWatchlistBloc>.value(
       value: mockBloc,
       child: MaterialApp(
@@ -31,7 +31,7 @@ void main() {
       (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(TvSeriesWatchlistLoading());
 
-    await tester.pumpWidget(_makeTestableWidget(WatchlistTvSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const WatchlistTvSeriesPage()));
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
@@ -39,17 +39,17 @@ void main() {
   testWidgets('Page should display text error', (WidgetTester tester) async {
     when(() => mockBloc.state)
         .thenReturn(TvSeriesWatchlistError('Error message'));
-    await tester.pumpWidget(_makeTestableWidget(WatchlistTvSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const WatchlistTvSeriesPage()));
 
-    expect(find.byKey(Key('error_message')), findsOneWidget);
+    expect(find.byKey(const Key('error_message')), findsOneWidget);
   });
 
   testWidgets('Page should display list view when data loaded',
       (WidgetTester tester) async {
     when(() => mockBloc.state)
-        .thenReturn(TvSeriesWatchlistHasData(<TvSeries>[]));
+        .thenReturn(TvSeriesWatchlistHasData(const <TvSeries>[]));
 
-    await tester.pumpWidget(_makeTestableWidget(WatchlistTvSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const WatchlistTvSeriesPage()));
 
     expect(find.byType(ListView), findsOneWidget);
   });

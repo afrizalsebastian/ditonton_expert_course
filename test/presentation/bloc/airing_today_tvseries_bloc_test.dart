@@ -28,7 +28,7 @@ void main() {
   final tTvSeriesModel = TvSeries(
     adult: false,
     backdropPath: '/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg',
-    genreIds: [18, 80],
+    genreIds: const [18, 80],
     id: 1396,
     originalName: 'Breaking Bad',
     overview:
@@ -37,7 +37,7 @@ void main() {
     posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     firstAirDate: '2008-01-20',
     name: 'Breaking Bad',
-    originCountry: ["US"],
+    originCountry: const ["US"],
     voteAverage: 8.898,
     voteCount: 12979,
   );
@@ -65,7 +65,7 @@ void main() {
     'Should emit [Loading, Error] when get search is unsuccessful',
     build: () {
       when(mockGetNowPlayingTvSeries.execute())
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return piringTodayTvSeriesBloc;
     },
     act: (bloc) => bloc.add(FetchAiringTodayTvSeries()),

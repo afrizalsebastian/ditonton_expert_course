@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return MaterialApp(
       home: body,
     );
   }
 
   testWidgets('Tapping back button should pop screen', (tester) async {
-    await tester.pumpWidget(_makeTestableWidget(AboutPage()));
+    await tester.pumpWidget(makeTestableWidget(const AboutPage()));
 
     await tester.tap(find.byType(IconButton));
     await tester.pumpAndSettle();
@@ -19,7 +19,7 @@ void main() {
   });
 
   testWidgets('Page should display image and description', (tester) async {
-    await tester.pumpWidget(_makeTestableWidget(AboutPage()));
+    await tester.pumpWidget(makeTestableWidget(const AboutPage()));
 
     expect(find.byType(Image), findsOneWidget);
 

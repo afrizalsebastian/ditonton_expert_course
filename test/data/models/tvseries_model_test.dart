@@ -3,7 +3,7 @@ import 'package:ditonton/domain/entities/tvseries.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final tTvSeriesModel = TvSeriesModel(
+  const tTvSeriesModel = TvSeriesModel(
     adult: false,
     backdropPath: '/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg',
     genreIds: [18, 80],
@@ -23,7 +23,7 @@ void main() {
   final tTvSeries = TvSeries(
     adult: false,
     backdropPath: '/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg',
-    genreIds: [18, 80],
+    genreIds: const [18, 80],
     id: 1396,
     originalName: 'Breaking Bad',
     overview:
@@ -32,7 +32,7 @@ void main() {
     posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     firstAirDate: '2008-01-20',
     name: 'Breaking Bad',
-    originCountry: ["US"],
+    originCountry: const ["US"],
     voteAverage: 8.898,
     voteCount: 12979,
   );

@@ -2,7 +2,7 @@ import 'package:ditonton/domain/entities/tvseries.dart';
 import 'package:equatable/equatable.dart';
 
 class TvSeriesModel extends Equatable {
-  TvSeriesModel({
+  const TvSeriesModel({
     required this.adult,
     required this.backdropPath,
     required this.genreIds,
@@ -72,19 +72,19 @@ class TvSeriesModel extends Equatable {
 
   TvSeries toEntity() {
     return TvSeries(
-      adult: this.adult,
-      backdropPath: this.backdropPath,
-      genreIds: this.genreIds,
-      id: this.id,
-      originCountry: this.originCountry,
-      originalName: this.originalName,
-      overview: this.overview,
-      popularity: this.popularity,
-      posterPath: this.posterPath,
-      firstAirDate: this.firstAirDate,
-      name: this.name,
-      voteAverage: this.voteAverage,
-      voteCount: this.voteCount,
+      adult: adult,
+      backdropPath: backdropPath,
+      genreIds: genreIds,
+      id: id,
+      originCountry: originCountry,
+      originalName: originalName,
+      overview: overview,
+      popularity: popularity,
+      posterPath: posterPath,
+      firstAirDate: firstAirDate,
+      name: name,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
     );
   }
 

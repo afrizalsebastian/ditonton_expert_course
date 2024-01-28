@@ -29,7 +29,7 @@ void main() {
   final tTvSeries = TvSeries(
     adult: false,
     backdropPath: '/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg',
-    genreIds: [18, 80],
+    genreIds: const [18, 80],
     id: 1396,
     originalName: 'Breaking Bad',
     overview:
@@ -38,7 +38,7 @@ void main() {
     posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     firstAirDate: '2008-01-20',
     name: 'Breaking Bad',
-    originCountry: ["US"],
+    originCountry: const ["US"],
     voteAverage: 8.898,
     voteCount: 12979,
   );
@@ -70,7 +70,7 @@ void main() {
   test('should return error when data is unsuccessful', () async {
     // arrange
     when(mockGetTopRatedTvSeries.execute())
-        .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
     // act
     await notifier.fetchTopRatedTvSeries();
     // assert

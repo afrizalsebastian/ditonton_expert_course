@@ -17,7 +17,7 @@ void main() {
     mockBloc = MockSearchBloc();
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return BlocProvider<SearchTvSeriesBloc>.value(
       value: mockBloc,
       child: MaterialApp(
@@ -28,22 +28,22 @@ void main() {
 
   testWidgets('should display tvseries when data is loaded',
       (WidgetTester tester) async {
-    when(() => mockBloc.state).thenReturn(SearchTvSeriesHasData(<TvSeries>[]));
+    when(() => mockBloc.state).thenReturn(SearchTvSeriesHasData(const <TvSeries>[]));
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(_makeTestableWidget(SearchPageTvSeries()));
+    await tester.pumpWidget(makeTestableWidget(const SearchPageTvSeries()));
 
     expect(listViewFinder, findsOneWidget);
   });
 
   testWidgets('should display text with search result when data is loaded',
       (WidgetTester tester) async {
-    when(() => mockBloc.state).thenReturn(SearchTvSeriesHasData(<TvSeries>[]));
+    when(() => mockBloc.state).thenReturn(SearchTvSeriesHasData(const <TvSeries>[]));
 
     final textFinder = find.text('Search Result');
 
-    await tester.pumpWidget(_makeTestableWidget(SearchPageTvSeries()));
+    await tester.pumpWidget(makeTestableWidget(const SearchPageTvSeries()));
 
     expect(textFinder, findsOneWidget);
   });
@@ -54,7 +54,7 @@ void main() {
 
     final containerFinder = find.byType(Container);
 
-    await tester.pumpWidget(_makeTestableWidget(SearchPageTvSeries()));
+    await tester.pumpWidget(makeTestableWidget(const SearchPageTvSeries()));
 
     expect(containerFinder, findsOneWidget);
   });
@@ -62,9 +62,9 @@ void main() {
   testWidgets('should display text with message when error',
       (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(SearchTvSeriesError('message'));
-    final textFinder = find.byKey(Key('error_message'));
+    final textFinder = find.byKey(const Key('error_message'));
 
-    await tester.pumpWidget(_makeTestableWidget(SearchPageTvSeries()));
+    await tester.pumpWidget(makeTestableWidget(const SearchPageTvSeries()));
 
     expect(textFinder, findsOneWidget);
   });

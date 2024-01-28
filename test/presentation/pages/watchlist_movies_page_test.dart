@@ -18,7 +18,7 @@ void main() {
     mockBloc = MockMovieWatchlistBloc();
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return BlocProvider<MovieWatchlistBloc>.value(
       value: mockBloc,
       child: MaterialApp(
@@ -31,7 +31,7 @@ void main() {
       (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(MovieWatchlistLoading());
 
-    await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+    await tester.pumpWidget(makeTestableWidget(const WatchlistMoviesPage()));
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
@@ -39,16 +39,16 @@ void main() {
   testWidgets('Page should display text error', (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(MovieWatchlistError('Error message'));
 
-    await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+    await tester.pumpWidget(makeTestableWidget(const WatchlistMoviesPage()));
 
-    expect(find.byKey(Key('error_message')), findsOneWidget);
+    expect(find.byKey(const Key('error_message')), findsOneWidget);
   });
 
   testWidgets('Page should display list view when data loaded',
       (WidgetTester tester) async {
-    when(() => mockBloc.state).thenReturn(MovieWatchlistHasData(<Movie>[]));
+    when(() => mockBloc.state).thenReturn(MovieWatchlistHasData(const <Movie>[]));
 
-    await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+    await tester.pumpWidget(makeTestableWidget(const WatchlistMoviesPage()));
 
     expect(find.byType(ListView), findsOneWidget);
   });

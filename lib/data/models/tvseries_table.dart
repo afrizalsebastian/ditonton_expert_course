@@ -9,7 +9,7 @@ class TvSeriesTable extends Equatable {
   final String? overview;
   final String type = 'TVSERIES';
 
-  TvSeriesTable({
+  const TvSeriesTable({
     required this.id,
     required this.name,
     required this.posterPath,

@@ -13,7 +13,7 @@ class TvSeriesDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail-tvseris';
 
   final int id;
-  TvSeriesDetailPage({required this.id});
+  const TvSeriesDetailPage({super.key, required this.id});
 
   @override
   _TvSeriesDetailPageState createState() => _TvSeriesDetailPageState();
@@ -40,7 +40,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
       body: BlocBuilder<TvSeriesDetailBloc, TvSeriesDetailState>(
         builder: (context, state) {
           if (state is TvSeriesDetailLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (state is TvSeriesDetailHasData) {
@@ -50,7 +50,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
           } else if (state is TvSeriesDetailError) {
             return Text(state.message);
           } else {
-            return Text('Failed');
+            return const Text('Failed');
           }
         },
       ),
@@ -61,7 +61,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
 class DetailContent extends StatelessWidget {
   final TvSeriesDetail tvSeries;
 
-  DetailContent(this.tvSeries);
+  const DetailContent(this.tvSeries, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,17 +71,17 @@ class DetailContent extends StatelessWidget {
         CachedNetworkImage(
           imageUrl: 'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
           width: screenWidth,
-          placeholder: (context, url) => Center(
+          placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
           ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         Container(
           margin: const EdgeInsets.only(top: 48 + 8),
           child: DraggableScrollableSheet(
             builder: (context, scrollController) {
               return Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: kRichBlack,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
@@ -108,7 +108,7 @@ class DetailContent extends StatelessWidget {
                               builder: (context, state) {
                                 return ElevatedButton(
                                   onPressed: () async {
-                                    var message;
+                                    String message;
                                     if (state is NotInWatchlist) {
                                       context
                                           .read<TvSeriesDetailWatchlistBloc>()
@@ -150,9 +150,9 @@ class DetailContent extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       state is InWatchlist
-                                          ? Icon(Icons.check)
-                                          : Icon(Icons.add),
-                                      Text('Watchlist'),
+                                          ? const Icon(Icons.check)
+                                          : const Icon(Icons.add),
+                                      const Text('Watchlist'),
                                     ],
                                   ),
                                 );
@@ -170,7 +170,7 @@ class DetailContent extends StatelessWidget {
                                 RatingBarIndicator(
                                   rating: tvSeries.voteAverage / 2,
                                   itemCount: 5,
-                                  itemBuilder: (context, index) => Icon(
+                                  itemBuilder: (context, index) => const Icon(
                                     Icons.star,
                                     color: kMikadoYellow,
                                   ),
@@ -179,7 +179,7 @@ class DetailContent extends StatelessWidget {
                                 Text('${tvSeries.voteAverage}')
                               ],
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
                               'Overview',
                               style: kHeading6,
@@ -187,7 +187,7 @@ class DetailContent extends StatelessWidget {
                             Text(
                               tvSeries.overview,
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
                               'Recommendations',
                               style: kHeading6,
@@ -196,7 +196,7 @@ class DetailContent extends StatelessWidget {
                                 TvSeriesRecommendationState>(
                               builder: (context, state) {
                                 if (state is TvSeriesRecommendationLoading) {
-                                  return Center(
+                                  return const Center(
                                     child: CircularProgressIndicator(),
                                   );
                                 } else if (state
@@ -205,7 +205,7 @@ class DetailContent extends StatelessWidget {
                                 } else if (state
                                     is TvSeriesRecommendationHasData) {
                                   final recommendations = state.result;
-                                  return Container(
+                                  return SizedBox(
                                     height: 150,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
@@ -222,20 +222,20 @@ class DetailContent extends StatelessWidget {
                                               );
                                             },
                                             child: ClipRRect(
-                                              borderRadius: BorderRadius.all(
+                                              borderRadius: const BorderRadius.all(
                                                 Radius.circular(8),
                                               ),
                                               child: CachedNetworkImage(
                                                 imageUrl:
                                                     'https://image.tmdb.org/t/p/w500${movie.posterPath}',
                                                 placeholder: (context, url) =>
-                                                    Center(
+                                                    const Center(
                                                   child:
                                                       CircularProgressIndicator(),
                                                 ),
                                                 errorWidget:
                                                     (context, url, error) =>
-                                                        Icon(Icons.error),
+                                                        const Icon(Icons.error),
                                               ),
                                             ),
                                           ),
@@ -276,7 +276,7 @@ class DetailContent extends StatelessWidget {
             backgroundColor: kRichBlack,
             foregroundColor: Colors.white,
             child: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -290,7 +290,7 @@ class DetailContent extends StatelessWidget {
   String _showGenres(List<Genre> genres) {
     String result = '';
     for (var genre in genres) {
-      result += genre.name + ', ';
+      result += '${genre.name}, ';
     }
 
     if (result.isEmpty) {

@@ -18,7 +18,7 @@ void main() {
     mockBloc = MockPopularMoviesBloc();
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return BlocProvider<PopularMoviesBloc>.value(
       value: mockBloc,
       child: MaterialApp(
@@ -34,7 +34,7 @@ void main() {
     final progressBarFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
+    await tester.pumpWidget(makeTestableWidget(const PopularMoviesPage()));
 
     expect(centerFinder, findsOneWidget);
     expect(progressBarFinder, findsOneWidget);
@@ -42,11 +42,11 @@ void main() {
 
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
-    when(() => mockBloc.state).thenReturn(PopularMoviesHasData(<Movie>[]));
+    when(() => mockBloc.state).thenReturn(PopularMoviesHasData(const <Movie>[]));
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
+    await tester.pumpWidget(makeTestableWidget(const PopularMoviesPage()));
 
     expect(listViewFinder, findsOneWidget);
   });
@@ -55,9 +55,9 @@ void main() {
       (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(PopularMoviesError('Error message'));
 
-    final textFinder = find.byKey(Key('error_message'));
+    final textFinder = find.byKey(const Key('error_message'));
 
-    await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
+    await tester.pumpWidget(makeTestableWidget(const PopularMoviesPage()));
 
     expect(textFinder, findsOneWidget);
   });

@@ -18,7 +18,7 @@ void main() {
     mockBloc = MockTopRatedTvSeriesBloc();
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return BlocProvider<TopRatedTvSeriesBloc>.value(
       value: mockBloc,
       child: MaterialApp(
@@ -34,7 +34,7 @@ void main() {
     final progressFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(_makeTestableWidget(TopRatedTvSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const TopRatedTvSeriesPage()));
 
     expect(centerFinder, findsOneWidget);
     expect(progressFinder, findsOneWidget);
@@ -43,11 +43,11 @@ void main() {
   testWidgets('Page should display when data is loaded',
       (WidgetTester tester) async {
     when(() => mockBloc.state)
-        .thenReturn(TopRatedTvSeriesHasData(<TvSeries>[]));
+        .thenReturn(TopRatedTvSeriesHasData(const <TvSeries>[]));
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(_makeTestableWidget(TopRatedTvSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const TopRatedTvSeriesPage()));
 
     expect(listViewFinder, findsOneWidget);
   });
@@ -57,9 +57,9 @@ void main() {
     when(() => mockBloc.state)
         .thenReturn(TopRatedTvSeriesError('Error message'));
 
-    final textFinder = find.byKey(Key('error_message'));
+    final textFinder = find.byKey(const Key('error_message'));
 
-    await tester.pumpWidget(_makeTestableWidget(TopRatedTvSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const TopRatedTvSeriesPage()));
 
     expect(textFinder, findsOneWidget);
   });

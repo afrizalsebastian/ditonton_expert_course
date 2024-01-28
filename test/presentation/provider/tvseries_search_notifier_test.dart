@@ -28,7 +28,7 @@ void main() {
   final tTvSeries = TvSeries(
     adult: false,
     backdropPath: '/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg',
-    genreIds: [18, 80],
+    genreIds: const [18, 80],
     id: 1396,
     originalName: 'Breaking Bad',
     overview:
@@ -37,12 +37,12 @@ void main() {
     posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     firstAirDate: '2008-01-20',
     name: 'Breaking Bad',
-    originCountry: ["US"],
+    originCountry: const ["US"],
     voteAverage: 8.898,
     voteCount: 12979,
   );
   final tTvSeriesList = <TvSeries>[tTvSeries];
-  final tQuery = 'breaking';
+  const tQuery = 'breaking';
 
   group('search tv series', () {
     test('should change state to loading when usecase is called', () async {
@@ -71,7 +71,7 @@ void main() {
     test('should return error when data is unsuccessful', () async {
       // arrange
       when(mockSearchTvSeries.execute(tQuery))
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       // act
       await provider.fetchTvSeriesSearch(tQuery);
       // assert

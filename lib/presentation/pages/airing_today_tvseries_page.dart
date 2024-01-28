@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AiringTodayTvSeries extends StatefulWidget {
   static const ROUTE_NAME = '/airing-today-tvseries';
 
+  const AiringTodayTvSeries({super.key});
+
   @override
   _AiringTodayTvSeriesState createState() => _AiringTodayTvSeriesState();
 }
@@ -23,14 +25,14 @@ class _AiringTodayTvSeriesState extends State<AiringTodayTvSeries> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Airing Today TV Series'),
+        title: const Text('Airing Today TV Series'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<AiringTodayTvSeriesBloc, AiringTodayTvSeriesState>(
           builder: (context, state) {
             if (state is AiringTodayTvSeriesLoading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (state is AiringTodayTvSeriesHasData) {
@@ -45,7 +47,7 @@ class _AiringTodayTvSeriesState extends State<AiringTodayTvSeries> {
             } else if (state is AiringTodayTvSeriesError) {
               return Text(state.message);
             } else {
-              return Text('Failed');
+              return const Text('Failed');
             }
           },
         ),

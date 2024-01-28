@@ -3,7 +3,7 @@ import 'package:ditonton/domain/entities/tvseries_detail.dart';
 import 'package:equatable/equatable.dart';
 
 class TvSeriesDetailResponse extends Equatable {
-  TvSeriesDetailResponse({
+  const TvSeriesDetailResponse({
     required this.adult,
     required this.backdropPath,
     required this.episodeRunTime,
@@ -81,22 +81,22 @@ class TvSeriesDetailResponse extends Equatable {
 
   TvSeriesDetail toEntity() {
     return TvSeriesDetail(
-      adult: this.adult,
-      backdropPath: this.backdropPath,
-      genres: this.genres.map((genre) => genre.toEntity()).toList(),
-      id: this.id,
-      overview: this.overview,
-      posterPath: this.posterPath,
-      voteAverage: this.voteAverage,
-      voteCount: this.voteCount,
+      adult: adult,
+      backdropPath: backdropPath,
+      genres: genres.map((genre) => genre.toEntity()).toList(),
+      id: id,
+      overview: overview,
+      posterPath: posterPath,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
       episodeRunTime: List<int>.from(episodeRunTime?.map((x) => x) ?? []),
-      firstAirDate: this.firstAirDate,
-      inProduction: this.inProduction,
-      name: this.name,
-      numberOfEpisodes: this.numberOfEpisodes,
-      numberOfSeasons: this.numberOfSeasons,
-      originalName: this.originalName,
-      tagline: this.tagline,
+      firstAirDate: firstAirDate,
+      inProduction: inProduction,
+      name: name,
+      numberOfEpisodes: numberOfEpisodes,
+      numberOfSeasons: numberOfSeasons,
+      originalName: originalName,
+      tagline: tagline,
     );
   }
 

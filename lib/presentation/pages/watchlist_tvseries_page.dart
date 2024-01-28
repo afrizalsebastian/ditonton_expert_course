@@ -7,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class WatchlistTvSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-tvseries';
 
+  const WatchlistTvSeriesPage({super.key});
+
   @override
   _WatchlistTvSeriesPageState createState() => _WatchlistTvSeriesPageState();
 }
@@ -26,6 +28,7 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
     routeObserver.subscribe(this, ModalRoute.of(context)!);
   }
 
+  @override
   void didPopNext() {
     context.read<TvSeriesWatchlistBloc>().add(FetchTvSeriesWatchlist());
   }
@@ -34,14 +37,14 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Watchlist'),
+        title: const Text('Watchlist'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TvSeriesWatchlistBloc, TvSeriesWatchlistState>(
           builder: (context, state) {
             if (state is TvSeriesWatchlistLoading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (state is TvSeriesWatchlistHasData) {
@@ -54,11 +57,11 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
               );
             } else if (state is TvSeriesWatchlistError) {
               return Center(
-                key: Key('error_message'),
+                key: const Key('error_message'),
                 child: Text(state.message),
               );
             } else {
-              return Center(
+              return const Center(
                 child: Text(''),
               );
             }

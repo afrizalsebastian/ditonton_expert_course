@@ -7,11 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SearchPageTvSeries extends StatelessWidget {
   static const ROUTE_NAME = '/search-tvseries';
 
+  const SearchPageTvSeries({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search TV Series'),
+        title: const Text('Search TV Series'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -22,14 +24,14 @@ class SearchPageTvSeries extends StatelessWidget {
               onChanged: (query) {
                 context.read<SearchTvSeriesBloc>().add(OnQueryChanged(query));
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search title',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(),
               ),
               textInputAction: TextInputAction.search,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'Search Result',
               style: kHeading6,
@@ -37,7 +39,7 @@ class SearchPageTvSeries extends StatelessWidget {
             BlocBuilder<SearchTvSeriesBloc, SearchTvSeriesState>(
                 builder: (context, state) {
               if (state is SearchTvSeriesLoading) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else if (state is SearchTvSeriesHasData) {
@@ -55,7 +57,7 @@ class SearchPageTvSeries extends StatelessWidget {
               } else if (state is SearchTvSeriesError) {
                 return Expanded(
                   child: Center(
-                    child: Text(key: Key('error_message'), state.message),
+                    child: Text(key: const Key('error_message'), state.message),
                   ),
                 );
               } else {

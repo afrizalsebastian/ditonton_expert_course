@@ -44,6 +44,7 @@ dependencies:
   firebase_core: ^2.24.2
   firebase_analytics: ^10.8.0
   firebase_crashlytics: ^3.4.9
+  flutter_lints: ^3.0.1
 
 dev_dependencies:
   mockito: ^5.4.4

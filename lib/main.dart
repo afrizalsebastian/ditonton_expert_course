@@ -50,10 +50,12 @@ void main() async {
   } catch (e) {
     print("Failed to initialize Firebase: $e");
   }
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     FirebaseAnalytics firebaseAnalytics = di.locator<FirebaseAnalytics>();
@@ -117,7 +119,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
-        home: HomeMoviePage(),
+        home: const HomeMoviePage(),
         navigatorObservers: [
           routeObserver,
           FirebaseAnalyticsObserver(analytics: firebaseAnalytics),
@@ -125,19 +127,19 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case '/home':
-              return MaterialPageRoute(builder: (_) => HomeMoviePage());
+              return MaterialPageRoute(builder: (_) => const HomeMoviePage());
             case TvSeriesPage.ROUTE_NAME:
-              return MaterialPageRoute(builder: (_) => TvSeriesPage());
+              return MaterialPageRoute(builder: (_) => const TvSeriesPage());
             case PopularMoviesPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
+              return CupertinoPageRoute(builder: (_) => const PopularMoviesPage());
             case PopularTvSeriesPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => PopularTvSeriesPage());
+              return CupertinoPageRoute(builder: (_) => const PopularTvSeriesPage());
             case TopRatedMoviesPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
+              return CupertinoPageRoute(builder: (_) => const TopRatedMoviesPage());
             case TopRatedTvSeriesPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => TopRatedTvSeriesPage());
+              return CupertinoPageRoute(builder: (_) => const TopRatedTvSeriesPage());
             case AiringTodayTvSeries.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => AiringTodayTvSeries());
+              return CupertinoPageRoute(builder: (_) => const AiringTodayTvSeries());
             case MovieDetailPage.ROUTE_NAME:
               final id = settings.arguments as int;
               return MaterialPageRoute(
@@ -151,18 +153,18 @@ class MyApp extends StatelessWidget {
                 settings: settings,
               );
             case SearchPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => SearchPage());
+              return CupertinoPageRoute(builder: (_) => const SearchPage());
             case SearchPageTvSeries.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => SearchPageTvSeries());
+              return CupertinoPageRoute(builder: (_) => const SearchPageTvSeries());
             case WatchlistMoviesPage.ROUTE_NAME:
-              return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
+              return MaterialPageRoute(builder: (_) => const WatchlistMoviesPage());
             case WatchlistTvSeriesPage.ROUTE_NAME:
-              return MaterialPageRoute(builder: (_) => WatchlistTvSeriesPage());
+              return MaterialPageRoute(builder: (_) => const WatchlistTvSeriesPage());
             case AboutPage.ROUTE_NAME:
-              return MaterialPageRoute(builder: (_) => AboutPage());
+              return MaterialPageRoute(builder: (_) => const AboutPage());
             default:
               return MaterialPageRoute(builder: (_) {
-                return Scaffold(
+                return const Scaffold(
                   body: Center(
                     child: Text('Page not found :('),
                   ),

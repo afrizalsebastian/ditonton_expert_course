@@ -35,7 +35,7 @@ void main() {
     mockTvSeriesDetailWatchlistBloc = MockTvSeriesDetailWatchlistBloc();
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return MultiProvider(
       providers: [
         BlocProvider<TvSeriesDetailBloc>.value(value: mockTvSeriesDetailBloc),
@@ -56,13 +56,13 @@ void main() {
     when(() => mockTvSeriesDetailBloc.state)
         .thenReturn(TvSeriesDetailHasData(testTvSeriesDetail));
     when(() => mockTvSeriesRecommendationBloc.state)
-        .thenReturn(TvSeriesRecommendationHasData(<TvSeries>[]));
+        .thenReturn(TvSeriesRecommendationHasData(const <TvSeries>[]));
     when(() => mockTvSeriesDetailWatchlistBloc.state)
         .thenReturn(NotInWatchlist(''));
 
     final watchlistButtonIcon = find.byIcon(Icons.add);
 
-    await tester.pumpWidget(_makeTestableWidget(TvSeriesDetailPage(id: 1396)));
+    await tester.pumpWidget(makeTestableWidget(const TvSeriesDetailPage(id: 1396)));
 
     expect(watchlistButtonIcon, findsOneWidget);
   });
@@ -73,13 +73,13 @@ void main() {
     when(() => mockTvSeriesDetailBloc.state)
         .thenReturn(TvSeriesDetailHasData(testTvSeriesDetail));
     when(() => mockTvSeriesRecommendationBloc.state)
-        .thenReturn(TvSeriesRecommendationHasData(<TvSeries>[]));
+        .thenReturn(TvSeriesRecommendationHasData(const <TvSeries>[]));
     when(() => mockTvSeriesDetailWatchlistBloc.state)
         .thenReturn(InWatchlist(''));
 
     final watchlistButtonIcon = find.byIcon(Icons.check);
 
-    await tester.pumpWidget(_makeTestableWidget(TvSeriesDetailPage(id: 1396)));
+    await tester.pumpWidget(makeTestableWidget(const TvSeriesDetailPage(id: 1396)));
 
     expect(watchlistButtonIcon, findsOneWidget);
   });
@@ -90,13 +90,13 @@ void main() {
     when(() => mockTvSeriesDetailBloc.state)
         .thenReturn(TvSeriesDetailHasData(testTvSeriesDetail));
     when(() => mockTvSeriesRecommendationBloc.state)
-        .thenReturn(TvSeriesRecommendationHasData(<TvSeries>[]));
+        .thenReturn(TvSeriesRecommendationHasData(const <TvSeries>[]));
     when(() => mockTvSeriesDetailWatchlistBloc.state)
         .thenReturn(NotInWatchlist(''));
 
     final watchlistButton = find.byType(ElevatedButton);
 
-    await tester.pumpWidget(_makeTestableWidget(TvSeriesDetailPage(id: 1396)));
+    await tester.pumpWidget(makeTestableWidget(const TvSeriesDetailPage(id: 1396)));
 
     expect(find.byIcon(Icons.add), findsOneWidget);
 
@@ -113,13 +113,13 @@ void main() {
     when(() => mockTvSeriesDetailBloc.state)
         .thenReturn(TvSeriesDetailHasData(testTvSeriesDetail));
     when(() => mockTvSeriesRecommendationBloc.state)
-        .thenReturn(TvSeriesRecommendationHasData(<TvSeries>[]));
+        .thenReturn(TvSeriesRecommendationHasData(const <TvSeries>[]));
     when(() => mockTvSeriesDetailWatchlistBloc.state)
         .thenReturn(FailureWatchlist('Failed'));
 
     final watchlistButton = find.byType(ElevatedButton);
 
-    await tester.pumpWidget(_makeTestableWidget(TvSeriesDetailPage(id: 1396)));
+    await tester.pumpWidget(makeTestableWidget(const TvSeriesDetailPage(id: 1396)));
 
     expect(find.byIcon(Icons.add), findsOneWidget);
 

@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PopularMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/popular-movie';
 
+  const PopularMoviesPage({super.key});
+
   @override
   _PopularMoviesPageState createState() => _PopularMoviesPageState();
 }
@@ -22,14 +24,14 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular Movies'),
+        title: const Text('Popular Movies'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
           builder: (context, state) {
             if (state is PopularMoviesLoading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (state is PopularMoviesHasData) {
@@ -42,9 +44,9 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
                 itemCount: data.length,
               );
             } else if (state is PopularMoviesError) {
-              return Text(key: Key('error_message'), state.message);
+              return Text(key: const Key('error_message'), state.message);
             } else {
-              return Text('Failed');
+              return const Text('Failed');
             }
           },
         ),

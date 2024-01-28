@@ -6,7 +6,7 @@ import 'package:ditonton/domain/entities/tvseries_detail.dart';
 final testTvSeries = TvSeries(
   adult: false,
   backdropPath: '/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg',
-  genreIds: [18, 80],
+  genreIds: const [18, 80],
   id: 1396,
   originalName: 'Breaking Bad',
   overview:
@@ -15,14 +15,14 @@ final testTvSeries = TvSeries(
   posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
   firstAirDate: '2008-01-20',
   name: 'Breaking Bad',
-  originCountry: ["US"],
+  originCountry: const ["US"],
   voteAverage: 8.898,
   voteCount: 12979,
 );
 
 final testTvSeriesList = [testTvSeries];
 
-final testTvSeriesDetail = TvSeriesDetail(
+const testTvSeriesDetail = TvSeriesDetail(
   adult: false,
   backdropPath: 'backdropPath',
   genres: [
@@ -53,7 +53,7 @@ final testWatchlistTvSeries = TvSeries.watchlist(
       "When Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime.",
 );
 
-final testTvSeriesTable = TvSeriesTable(
+const testTvSeriesTable = TvSeriesTable(
   id: 1396,
   name: 'Breaking Bad',
   posterPath: '/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg',
